@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app_joda.views import *
-
+from app_jodas.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^s', main,name="inicio")
 ]
