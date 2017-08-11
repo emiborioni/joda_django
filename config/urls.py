@@ -17,6 +17,6 @@ from django.conf.urls import url
 from django.contrib import admin
 from app_jodas.views import *
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^s', main,name="inicio")
+    url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^$', main,name="inicio")
 ]
