@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+	    <!-- Compiled and minified CSS -->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+	    <!-- Compiled and minified JavaScript -->
+	    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	        crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static "css.css" %}">
+    </head>
+	<body>
+		<div id="register" class="col s12">
+			<form class="col s12">
+				<div class="form-container">
+					<h3 class="teal-text" style="text-align: center"><b>Formulario</b></h3>
+					<div class="row">
+					<h4 class="teal-text" style="text-align: center"><b>Contacto</b></h4>
+
+					<div class="input-field col s12">
+						<input id="nombre" class="validate">
+						<label for="nombre"><b>Nombre</b></label>
+					</div class="input-field col s12">
+						<div class="input-field col s12">
+							<input id="last_name" type="text" class="validate">
+							<label for="last_name"><b>Apellido</b></label>
+						</div>
+
+
+	                    <div class="input-field col s12">
+							<input id="tel" type="text" class="validate">
+							<label for="tel"><b>Celular</label>
+						</div>
+
+						<div class="input-field col s12">
+							<input id="email" type="email" class="validate">
+							<label for="email"><b>Email</b></label>
+						</div>
+
+						<h4 class="teal-text" style="text-align: center"><b>Informacion del Lugar</b></h4>
+
+						<div class="input-field col s12">
+							<input id="nombre_lugar" type="text" class="validate">
+							<label for="nombre_lugar"><b>Nombre</b></label>
+						</div class="input-field col s12">
+						<div class="input-field col s12">
+							<label for="edadmin"><b>Edad Minima</b></label>
+							<select name="Edad Minima" class="validate">
+								<input type="text" name="example" list="exampleList">
+								<datalist id="exampleList">
+									<option value="16">
+									<option value="18">
+									<option value="21">
+									<option value="23">
+									<option value="25">
+								</datalist>
+							</select>
+						</div>
+
+						<div class="input-field col s12">
+							<input id="fecha" class="validate">
+							<label for="fecha"><b>Fecha</b></label>
+							<div class="auto-kal"></div>
+						</div>
+
+						<div class="input-field col s12">
+							<input id="precioentradas" class="validate">
+							<label for="precioentradas"><b>Tipo de fiesta</b></label>
+						</div class="input-field col s12">
+
+						<div class="input-field col s12">
+							<input id="precioentradas" class="validate">
+							<label for="precioentradas"><b>Precio de Entradas</b></label>
+						</div>
+
+	                    <div class="input-field col s12">
+							<input id="capacidadmaxima" type="text" class="validate">
+							<label for="capacidadmaxima"><b>Capacidad Maxima</b></label>
+						</div>
+
+	                    <div class="input-field col s12">
+							<input id="direc" type="text" class="validate">
+							<label for="direc"><b>Provincia - Ciudad - Barrio</b></label>
+						</div>
+
+	                    <div class="input-field col s12">
+							<input id="direc" type="text" class="validate">
+							<label for="direc"><b>Direccion</b></label>
+						</div> 
+
+	                    <div class="input-field col s12">
+							<input id="imagenes" class="validate">
+							<label for="imagenes"><b>Imagenes</b></label>
+							<form action="upload.php" method="post" enctype="multipart/form-data">Select image to upload:<p>
+								<input type="file" name="fileToUpload" id="fileToUpload"><p>
+							    <input type="submit" value="Upload Image" name="submit">
+							</form>
+						</div>
+				<center>
+					<button class="btn waves-effect waves-light teal" type="submit" name="action">Registrar</button>
+				</center>
+			</form>
+		</div>
+	</body>
+</html>
