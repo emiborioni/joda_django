@@ -11,17 +11,18 @@ from django.contrib.auth.models import User
 
 class Userprofile(models.Model):
     user=models.OneToOneField(User)
-    dni = models.CharField(max_length= 8)
+    celular = models.CharField(max_length= 9)
     direccion = models.CharField(max_length= 60)
     telefono = models.CharField(max_length= 9)
 
 
 class Evento(models.Model):
     nombre= models.CharField(max_length= 200)
-    fecha = models.DateTimeField()
+    edad_min=models.IntegerField(max_length=2)
+    fecha = 
+    tipo_fiesta = 
     precio = models.IntegerField(max_length=4)
     capacidad = models.IntegerField(max_length=6)
-    celular = models.CharField(max_length= 9)
     ubicacion = models.CharField(max_length= 60)
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
