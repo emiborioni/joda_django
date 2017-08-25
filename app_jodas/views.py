@@ -15,5 +15,6 @@ from django.utils import timezone
 from .models import *
 # Create your views here.
 
-def main(request):
-    return render(request,'main.html')
+def iniciador (request):
+    return render(request,'iniciador.html')
+
