@@ -19,8 +19,7 @@ class Userprofile(models.Model):
 class Evento(models.Model):
     nombre= models.CharField(max_length= 200)
     edad_min=models.IntegerField(max_length=2)
-    fecha = 
-    tipo_fiesta = 
+    tipo_fiesta = models.CharField(max_length=15)
     precio = models.IntegerField(max_length=4)
     capacidad = models.IntegerField(max_length=6)
     ubicacion = models.CharField(max_length= 60)

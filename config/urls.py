@@ -18,5 +18,7 @@ from django.contrib import admin
 from app_jodas.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^$', iniciador,name="iniciador")
+    url(r'^$', iniciador,name="iniciador"),
+    url(r'^ register/', registrar,name="registrar"),
+    url(r'^ login/', login,name="login")
 ]
