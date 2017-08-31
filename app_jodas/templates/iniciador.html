@@ -1,5 +1,5 @@
 <html>
-
+{% load static %}
 <head>
     <meta charset="utf-8"> {% load static %}
     <!-- Compiled and minified CSS -->
@@ -50,7 +50,7 @@ img:hover{
         <div class="col s6">
           <div class="card">
             <div class="card-image">
-              <a href="{% url 'registrar' %}"><img src= "register.jpg">
+              <a href="{% url 'registrar' %}"><img src= "{% static 'register.jpg' %}">
               <span class="card-title"></span>
             </div>
             <div class="card-action">
