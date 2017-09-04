@@ -11,10 +11,11 @@ from django.contrib.auth.models import User
 
 class Userprofile(models.Model):
     user=models.OneToOneField(User)
-    celular = models.CharField(max_length= 9, default = None)
+    celular = models.CharField(max_length= 10, default = None)
     direccion = models.CharField(max_length= 60)
     telefono = models.CharField(max_length= 9)
-
+    def __unicode__(self):
+       return self.user.username
 
 class Evento(models.Model):
     nombre= models.CharField(max_length= 200)
@@ -26,16 +27,10 @@ class Evento(models.Model):
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
     foto = models.ImageField(upload_to='fotos')    
+    def __unicode__(self):
+       return self.nombre
 
 class Imagenjoda(models.Model):
     evento = models.ForeignKey(Evento, related_name= 'images')
     tittle= models.CharField(max_length= 200)
     imagen= models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
-
-
-
-
-
-
-
-
