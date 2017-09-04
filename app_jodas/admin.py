@@ -7,3 +7,4 @@ from .models import *
 admin.site.register(Evento)
 admin.site.register(Userprofile)
 admin.site.register(Imagenjoda)
+admin.site.register(Asist)
