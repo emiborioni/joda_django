@@ -26,3 +26,9 @@ urlpatterns = [
     url(r'^(?P<nombre>[0-9]+)/$', main, name='main'),
 
 ]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
