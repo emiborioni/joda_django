@@ -23,6 +23,8 @@ def registrar (request):
 
 def login (request):
     return render(request,'login.html')
-    
+
+
 def main(request):
-    return render(request,'main.html')
+    joda = Evento.objects.all()
+    return render(request,'main.html', {'todos_los_eventos':joda})

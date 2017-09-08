@@ -15,6 +15,7 @@ class Userprofile(models.Model):
     direccion = models.CharField(max_length= 60)
     telefono = models.CharField(max_length= 9)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
     def __unicode__(self):
        return self.user.username
 
@@ -28,6 +29,7 @@ class Evento(models.Model):
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
     foto = models.ImageField(upload_to='fotos')    
+    #Fecha de cuando va ser el evento
     def count_asist(self):
         return Asist.objects.filter(evento=self).count()
 
