@@ -39,7 +39,6 @@ img:hover{
 
 
 }
-
 </style>
 
 </head>
@@ -51,7 +50,7 @@ img:hover{
           <div class="nav-wrapper orange lighten-1">
             <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png" width="90" height="62.7" ></a>
             <ul class="right hide-on-med-and-down">
-              <li><a href=""><font color= "black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font></li>
+              <li><a href="{% url 'iniciador' %}"><font color= "black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font></li>
               <li><a href="#modal1"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png" width="90" height="62.7"></a></li>
               <li><a href=""><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png" width="90" height="62.7" ></a></li>
             </ul>
@@ -59,15 +58,6 @@ img:hover{
         </nav>
       </div>
       <!--Nav Bar-->
-
-
-
-
-
-
-
-
-
 
 
 		<div class="carousel">
@@ -103,13 +93,13 @@ img:hover{
              
               <span class="card-title activator grey-text text-darken-4">{{joda.nombre}}<i class="material-icons right">more_vert</i></span>
               <div class="card-action">
-                  {% if user == evento.user %}
-                    <a class="waves-effect deep-orange btn" href= "{% url 'delete_evento' evento.id %}"  <i class="small material-icons">delete</i></a>
+                  {% if user == joda.creador %}
+                    <a class="waves-effect deep-orange btn" href= "{% url 'delete_evento' joda.id %}"  <i class="small material-icons">delete</i></a>
                   {% endif %}
                   <!--{% if new == new_rt.save()}-->
-                  <a class="waves-effect blue darken-4 btn" href="">Asist</a>
+                  <a class="waves-effect blue darken-4 btn" href="">Asist</a>{{evento.count_asist}}/{{joda.capacidad}}{{joda.creador}}
                   <div class="right white-text">
-                    <p>{{ evento.count_asist }}</p>
+                    <p>{{ evento.count_asiste }}</p>
                   </div>
                 </div>
               

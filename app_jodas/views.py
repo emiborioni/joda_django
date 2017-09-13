@@ -43,10 +43,18 @@ def mkevento(request):
         return redirect('main.html')
     return HttpResponse('HOLA <b style="color: red">no puedes tweetear de esta forma</b>')
 
+def mkasist(request, evento_id):
+    ev = Evento.objects.get(id=evento_id)
+    new_asist, new = Asist.objects.get_or_create(asist=ev, user=request.creador)
+    if new:
+        new_asist.save()
+    else:
+        new_asist.delete()
+    return redirect('main')
 
 
 def delete_evento(request, evento_id):
     tw = Evento.objects.get(id=evento_id)
-    if request.user == tw.user:
+    if request.user == tw.creador:
         tw.delete()
-    return redirect('index')
+    return redirect('main')
