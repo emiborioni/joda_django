@@ -71,7 +71,7 @@ img:hover{
 
 
 		<div class="carousel">
-    	{% for joda in todos_los_eventos %}	<a class="carousel-item" href="#one!"><img src="{{ joda.foto.url }}" " /fotos"></img> </a>{% endfor %}
+    	{% for joda in todos_los_eventos %}	<a class="carousel-item" href="#one!"><img src="{{ joda.foto.url }}" " /fotos" width="800" height="300"></img> </a>{% endfor %}
   		</div>
       
   		<center><a class="waves-effect yellow btn">BUSCAR</a></center>
@@ -96,10 +96,7 @@ img:hover{
               <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               
-              <img src="{{ joda.foto.url }}" " /fotos"    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(0%);
-    height: 300px;
-    width: 800px;></img> 
+              <img src="{{ joda.foto.url }}" " /fotos" width="800" height="300"></img> 
               
             </div>
             <div class="card-content" href="Equipos.html">
@@ -110,7 +107,7 @@ img:hover{
                     <a class="waves-effect deep-orange btn" href= "{% url 'delete_evento' evento.id %}"  <i class="small material-icons">delete</i></a>
                   {% endif %}
                   <!--{% if new == new_rt.save()}-->
-                  <a class="waves-effect blue darken-4 btn" href="">RT</a>
+                  <a class="waves-effect blue darken-4 btn" href="">Asist</a>
                   <div class="right white-text">
                     <p>{{ evento.count_asist }}</p>
                   </div>
@@ -125,7 +122,6 @@ img:hover{
                           <ul><b style="color:black">Ubicacion: </b>{{joda.ubicacion}} </ul>
                           <ul><b style="color:black">Datos de Interes </b>{{joda.comentario}} </ul>
                           <ul><b style="color:black">Organizador: </b>{{joda.creador}}  </ul>
-                          <ul><b style="color:black">BOTON ASISTIRE / CAPACIDAD (QUE SE MUESTRE ANTES DE DESPLEGAR LA INFORMACION )</b> </ul>
                           
             </div>
           </div>
