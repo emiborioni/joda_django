@@ -19,25 +19,57 @@
 
         <style>
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
+#row{
 img {
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);
-        height: 300px;
+    height: 300px;
     width: 800px;
 }
-        
+       
 img:hover{
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(100%);
             height: 300px;
     width: 800px;
+}}
+#navbar-fixed{
+    width:"90px"; 
+    height:"62.7px";
+
+
 }
+
 </style>
 
 </head>
 
 	  <body background="{% static 'main.jpg' %}">
+        <!--Nav Bar-->
+      <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper orange lighten-1">
+            <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png" width="90" height="62.7" ></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href=""><font color= "black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font></li>
+              <li><a href="#modal1"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png" width="90" height="62.7"></a></li>
+              <li><a href=""><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png" width="90" height="62.7" ></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <!--Nav Bar-->
+
+
+
+
+
+
+
+
+
+
+
 		<div class="carousel">
     	{% for joda in todos_los_eventos %}	<a class="carousel-item" href="#one!"><img src="{{ joda.foto.url }}" " /fotos"></img> </a>{% endfor %}
   		</div>
@@ -64,12 +96,25 @@ img:hover{
               <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               
-              <img src="{{ joda.foto.url }}" " /fotos"></img> 
+              <img src="{{ joda.foto.url }}" " /fotos"    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+    height: 300px;
+    width: 800px;></img> 
               
             </div>
             <div class="card-content" href="Equipos.html">
              
               <span class="card-title activator grey-text text-darken-4">{{joda.nombre}}<i class="material-icons right">more_vert</i></span>
+              <div class="card-action">
+                  {% if user == evento.user %}
+                    <a class="waves-effect deep-orange btn" href= "{% url 'delete_evento' evento.id %}"  <i class="small material-icons">delete</i></a>
+                  {% endif %}
+                  <!--{% if new == new_rt.save()}-->
+                  <a class="waves-effect blue darken-4 btn" href="">RT</a>
+                  <div class="right white-text">
+                    <p>{{ evento.count_asist }}</p>
+                  </div>
+                </div>
               
             </div>
             <div class="card-reveal" href="Equipos.html">
@@ -88,12 +133,48 @@ img:hover{
 {% endfor %}
 
 
+      <div id="modal1" class="modal blue-grey darken-1">
+        <!-- este es el form que enseño javi-->
+        <form action="{% url 'mkevento' %}" method="POST">
+          {% csrf_token %}
+          <div class="modal-content">
+            <h4 align="center">New Event</h4>
+            <input name="Ttext" class="materialize-textarea" type="text" placeholder="Write here your event name"></input>
+          </div>
+          <div class="modal-content">
+            <input name="edad_min" type="number" placeholder="Write here the minium age"></input>
+        </div>
+          <div class="modal-content">
+            <input name="tipo_fiesta" type="text" placeholder="Write here type of party"></input>
+        </div>
+          <div class="modal-content">
+            <input name="precio" type="number" placeholder="Write here the price"></input>
+        </div>
+          <div class="modal-content">
+            <input name="capacidad" type="number" placeholder="Write here the maxium capacity "></input>
+        </div>
+          <div class="modal-content">
+            <input name="ubicacion" type="text" placeholder="Write here the location "></input>
+        </div>
+          <div class="modal-content">
+            <textarea name="comentario" class="materialize-textarea" type="text" placeholder="Write here important informacion"></textarea>
+        </div>
+          <div class="modal-content">
+			    <form action="upload.php" method="post" enctype="multipart/form-data">Select image to upload:<p>
+				<input type="file" name="fileToUpload" id="fileToUpload"><p>
+        </div>
+        <div class="modal-footer blue-grey darken-2">
+            <input class="modal-action modal-close btn-flat" value="Submit" type="submit">
+          </div>
+        </form>
+      </div>
 
 	</body>
 	<script>
 	$(document).ready(function(){
       $('.carousel').carousel();
     });
+    $('.modal').modal();
 	</script>
 
 

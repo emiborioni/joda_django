@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^ login/', login,name="login"),
     url(r'^main/', main,name="main"),
     url(r'^(?P<nombre>[0-9]+)/$', main, name='main'),
+    url(r'^mkevento/', mkevento, name='mkevento'),
+    url(r'^delete_evento/(?P<evento_id>\d+)$', delete_evento, name='delete_evento'),
 
 ]
 

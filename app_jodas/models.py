@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 class Userprofile(models.Model):
     user=models.OneToOneField(User)
-    celular = models.CharField(max_length= 10, default = None)
+    celular = models.CharField(max_length= 10)
     direccion = models.CharField(max_length= 60)
     telefono = models.CharField(max_length= 9)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -22,7 +22,7 @@ class Userprofile(models.Model):
 class Evento(models.Model):
     nombre= models.CharField(max_length= 200)
     edad_min=models.IntegerField(default= None)
-    tipo_fiesta = models.CharField(max_length=15, default= None)
+    tipo_fiesta = models.CharField(max_length=15)
     precio = models.IntegerField()
     capacidad = models.IntegerField()
     ubicacion = models.CharField(max_length= 60)
@@ -35,12 +35,6 @@ class Evento(models.Model):
 
     def __unicode__(self):
        return self.nombre
-
-class Imagenjoda(models.Model):
-    evento = models.ForeignKey(Evento, related_name= 'images')
-    tittle= models.CharField(max_length= 200)
-    imagen= models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
-
 
 class Asist(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)

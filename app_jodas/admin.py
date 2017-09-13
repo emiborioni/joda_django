@@ -6,5 +6,4 @@ from .models import *
 # Register your models here.
 admin.site.register(Evento)
 admin.site.register(Userprofile)
-admin.site.register(Imagenjoda)
 admin.site.register(Asist)
