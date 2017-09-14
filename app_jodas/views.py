@@ -50,7 +50,7 @@ def mkasist(request, evento_id):
         new_asist.save()
     else:
         new_asist.delete()
-    return redirect('iniciador')
+    return redirect('main')
 
 
 def delete_evento(request, evento_id):

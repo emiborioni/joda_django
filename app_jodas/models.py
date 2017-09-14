@@ -31,13 +31,13 @@ class Evento(models.Model):
     foto = models.ImageField(upload_to='fotos')    
     #Fecha de cuando va ser el evento
     def count_asist(self):
-        return Asist.objects.filter(evento=self).count()
+        return Asist.objects.filter(asist=self).count()
 
     def __unicode__(self):
-       return self.nombre
+       return self.nombre 
 
 class Asist(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     asist = models.ForeignKey(Evento)
     def __unicode__(self):
-       return 'Asiste: ' + self.user.username + ' al evento ' + self.asist.nombre
+       return 'Asiste: ' + self.user.username + ' al evento ' + self.asist.nombre 

@@ -97,9 +97,9 @@ img:hover{
                     <a class="waves-effect deep-orange btn" href= "{% url 'delete_evento' joda.id %}"  <i class="small material-icons">delete</i></a>
                   {% endif %}
                   <!--{% if new == new_rt.save()}-->
-                  <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>/{{joda.capacidad}}{{joda.creador}}
+                  <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>/{{joda.capacidad}}
                   <div class="right white-text">
-                    <p>{{count_asist }}</p>
+                    <p>{{asist.count_asist}}</p>
                   </div>
                 </div>
               
