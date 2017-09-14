@@ -37,7 +37,8 @@ def mkevento(request):
         capacidad = request.POST['capacidad']
         ubicacion = request.POST['ubicacion']
         comentario = request.POST['comentario']
-        foto = request.fileToUpload['fileToUpload']
+        foto = request.POST['foto']
+        fecha = request.POST['fecha']
         new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto )
         new_evento.save()
         return redirect('main.html')

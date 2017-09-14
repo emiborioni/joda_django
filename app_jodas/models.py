@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
 
 
 
@@ -28,7 +30,8 @@ class Evento(models.Model):
     ubicacion = models.CharField(max_length= 60)
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
-    foto = models.ImageField(upload_to='fotos')    
+    foto = models.ImageField(upload_to='fotos')  
+    fecha = models.DateTimeField(default = timezone.now)  
     #Fecha de cuando va ser el evento
     def count_asist(self):
         return Asist.objects.filter(asist=self).count()
