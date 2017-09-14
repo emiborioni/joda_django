@@ -45,12 +45,12 @@ def mkevento(request):
 
 def mkasist(request, evento_id):
     ev = Evento.objects.get(id=evento_id)
-    new_asist, new = Asist.objects.get_or_create(asist=ev, user=request.creador)
+    new_asist, new = Asist.objects.get_or_create(asist=ev, user=request.user)
     if new:
         new_asist.save()
     else:
         new_asist.delete()
-    return redirect('main')
+    return redirect('iniciador')
 
 
 def delete_evento(request, evento_id):
