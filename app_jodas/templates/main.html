@@ -62,7 +62,7 @@
                         width="90" height="62.7"></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="{% url 'iniciador' %}">
+                        <a href="#modal2">
                             <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
                     </li>
                     <li>
@@ -103,6 +103,7 @@
         <div class="w3-hide-large" style="margin-top:83px"></div>
 
         <!-- Photo grid -->
+        
         {% for joda in todos_los_eventos %}
         <div class="row">
             <div class="col s2">
@@ -135,10 +136,12 @@
                         <ul><b style="color:black">Ubicacion: </b>{{joda.ubicacion}} </ul>
                         <ul><b style="color:black">Datos de Interes </b>{{joda.comentario}} </ul>
                         <ul><b style="color:black">Organizador: </b>{{joda.creador}} </ul>
+                        <ul><b style="color:black">Telefono del Organizador: </b>{{usuario.telefono}} </ul>
 
                     </div>
                 </div>
             </div>
+            
             {% endfor %}
 
 
@@ -179,14 +182,60 @@
                     </div>
                 </form>
             </div>
+          <div id="modal2" class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <h4 align="center">Login</h4>
+                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"></input>
+                    </div>
 
+                    <div class="modal-content">
+                        <input name="password" type="password" placeholder="Write here your password"></<input>  
+                    </div>
+                    <center>
+					<br>
+					<a href="#modal3">Forgotten password?</a>
+				    </center>
+                    <div class="modal-footer blue-grey darken-2">
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit">
+                    <div>
+                    
+                </form>
+                
+                </div>
+                <div id="modal3" class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'registrar' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <h4 align="center">Register</h4>
+                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"></input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="password" type="password" placeholder="Write here your password"></<input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="password" type="password" placeholder="Repite your password"></<input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="celular" type="text" placeholder="Write here your mobilephone"></<input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="direccion" type="text" placeholder="Write here your address"></<input>
+                    </div>
+                    </div>
+
+                    </form>
 </body>
 <script>
     $(document).ready(function () {
         $('.carousel').carousel();
     });
     $('.modal').modal();
-    $imagePath = "fotos";
+    $('.modal2').modal2();
+    $('.modal3').modal3();
 </script>
 
 

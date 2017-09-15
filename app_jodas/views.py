@@ -26,6 +26,7 @@ def login (request):
 
 def main(request):
     joda = Evento.objects.all()
+    usuario = Userprofile.objects.all()
     return render(request,'main.html', {'todos_los_eventos':joda})
 
 def mkevento(request):
