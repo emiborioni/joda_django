@@ -19,11 +19,11 @@ from app_jodas.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     
-    url(r'^$', iniciador,name="iniciador"),
+    url(r'^iniciador', iniciador,name="iniciador"),
     url(r'^ register/', register,name="registrar"),
     url(r'^ login/', login,name="login"),
     url(r'^ logout/', logout,name="logout"),
-    url(r'^main/', main,name="main"),
+    url(r'^$', main,name="main"),
     url(r'^(?P<nombre>[0-9]+)/$', main, name='main'),
     url(r'^mkevento/', mkevento, name='mkevento'),
     url(r'^mkasist/(?P<evento_id>\d+)$', mkasist, name='mkasist'),
