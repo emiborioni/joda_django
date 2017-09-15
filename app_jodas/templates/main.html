@@ -119,16 +119,16 @@
                             {% if user == joda.creador %}
                             <a class="waves-effect deep-orange btn" href="{% url 'delete_evento' joda.id %}" <i class="small material-icons">delete</i></a>                            {% endif %}
                             <!--{% if new == new_rt.save()}-->
-                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>/{{joda.capacidad}}
+                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>{{ joda.count_asist }}/{{joda.capacidad}}
                             <div class="right white-text">
-                                <p>{{asist.count_asist}}</p>
+                                <p>{{ joda.count_asist }}</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-reveal" href="Equipos.html">
                         <span class="card-title grey-text text-darken-4">INFORMACION DEL EVENTO<i class="material-icons right">close</i></span>
-                        <ul><b style="color:black">Evento: </b>{{joda.nombre}}</ul>
+                        <ul><b style="color:black">Evento: </b>{{ joda.nombre }}</ul>
                         <ul><b style="color:black">Fecha: </b>{{joda.fecha}}</ul>
                         <ul><b style="color:black">Tipo de fiesta: </b>{{joda.tipo_fiesta}} </ul>
                         <ul><b style="color:black">Precio: </b>{{joda.precio}} </ul>
@@ -177,7 +177,7 @@
                     <div class="modal-footer blue-grey darken-2">
                         <input class="modal-action modal-close btn-flat" value="Submit" type="submit">
                     </div>
-                    </form>
+                </form>
             </div>
 
 </body>

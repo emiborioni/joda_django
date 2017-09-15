@@ -34,6 +34,7 @@ class Evento(models.Model):
     fecha = models.DateTimeField(default = timezone.now)  
     #Fecha de cuando va ser el evento
     def count_asist(self):
+        print Asist.objects.filter(asist=self).count()
         return Asist.objects.filter(asist=self).count()
 
     def __unicode__(self):

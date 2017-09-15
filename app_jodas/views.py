@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, render, redirect 
 from django.template import RequestContext 
 from django.conf import settings 
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse 
+from django.http import HttpResponseRedirect, HttpResponse 
 from django.contrib.auth import login, logout, authenticate 
 from django.contrib.auth.models import AnonymousUser 
 from django.contrib import messages 
@@ -41,7 +41,7 @@ def mkevento(request):
         fecha = request.POST['fecha']
         new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto )
         new_evento.save()
-        return redirect('main.html')
+        return redirect('main')
     return HttpResponse('HOLA <b style="color: red">no puedes tweetear de esta forma</b>')
 
 def mkasist(request, evento_id):

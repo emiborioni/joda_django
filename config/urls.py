@@ -27,8 +27,6 @@ urlpatterns = [
     url(r'^mkevento/', mkevento, name='mkevento'),
     url(r'^mkasist/(?P<evento_id>\d+)$', mkasist, name='mkasist'),
     url(r'^delete_evento/(?P<evento_id>\d+)$', delete_evento, name='delete_evento'),
-    
-
 ]
 
 
