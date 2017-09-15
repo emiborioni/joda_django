@@ -23,20 +23,37 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 img {
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);
-        height: 700px;
-    width: 800px;
+        height: 300px;
+    width: 500px;
 }
         
 img:hover{
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(100%);
-            height: 700px;
-    width: 800px;
+            height: 300px;
+    width: 500px;}
+
+background {
+background-repeat:no-repeat;
+
+background-size:cover;}
+
+.row  {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  margin: 0 auto;
 }
 </style>
 </head>
 
-    <body class="w3-black w3-content" link="#000000" style= max-width:2000px background="{% static 'index.jpg' %}">
+    <body class="w3-black w3-content" link="#000000" background="{% static 'index.jpg' %}">
 
 
     <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
@@ -50,7 +67,7 @@ img:hover{
         <div class="col s6">
           <div class="card">
             <div class="card-image">
-              <a href="{% url 'registrar' %}"><img src= "{% static 'register.jpg' %}">
+              <a href="{% url 'registrar' %}"><img src="{% static 'register1.jpg' %}">
               <span class="card-title"></span>
             </div>
             <div class="card-action">
@@ -58,32 +75,17 @@ img:hover{
             </div>
           </div>
         </div>
-<div class="col s6">
+        <div class="col s6">
           <div class="card">
             <div class="card-image">
-              <a href="{% url 'login' %}"><img src="{% static 'login.jpg' %}">
+              <a href="{% url 'login' %}"><img src="{% static 'login1.jpg' %}">
               <span class="card-title"></span>
             </div>
             <div class="card-action">
               <a href="login.html">Iniciar Sesion</a>
             </div>
-          </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 </body>
 
