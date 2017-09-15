@@ -12,17 +12,28 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q 
 from datetime import datetime, timedelta 
 from django.utils import timezone
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import *
 # Create your views here.
 
 def iniciador (request):
     return render(request,'iniciador.html')
 
-def registrar (request):
-    return render(request,'register.html')
 
-def login (request):
-    return render(request,'login.html')
+def my_logout(request):
+    logout(request)
+    return redirect ('index')
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+    return redirect('main') 
+
 
 def main(request):
     joda = Evento.objects.all()
@@ -43,7 +54,7 @@ def mkevento(request):
         new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto )
         new_evento.save()
         return redirect('main')
-    return HttpResponse('HOLA <b style="color: red">no puedes tweetear de esta forma</b>')
+    return HttpResponse('HOLA <b style="color: red">no no no</b>')
 
 def mkasist(request, evento_id):
     ev = Evento.objects.get(id=evento_id)
