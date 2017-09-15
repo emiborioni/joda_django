@@ -39,6 +39,19 @@ def main(request):
     joda = Evento.objects.all()
     usuario = Userprofile.objects.all()
     return render(request,'main.html', {'todos_los_eventos':joda})
+    
+def register (request):
+    if request.method == 'POST':
+        username = request.POST['nombre_user']
+        password = request.POST['password']
+        celular = request.POST['celular']
+        direccion = request.POST['direccion']
+
+        userprofile = Userprofile(celular=celular, direccion=direccion)
+        userprofile.save()
+               
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
 
 def mkevento(request):
     if request.method == 'POST':

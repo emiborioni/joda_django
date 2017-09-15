@@ -20,8 +20,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     
     url(r'^$', iniciador,name="iniciador"),
-    url(r'^ register/', registrar,name="registrar"),
+    url(r'^ register/', register,name="registrar"),
     url(r'^ login/', login,name="login"),
+    url(r'^ logout/', logout,name="logout"),
     url(r'^main/', main,name="main"),
     url(r'^(?P<nombre>[0-9]+)/$', main, name='main'),
     url(r'^mkevento/', mkevento, name='mkevento'),
