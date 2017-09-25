@@ -24,7 +24,7 @@ def iniciador (request):
 
 def my_logout(request):
     logout(request)
-    return redirect ('index')
+    return redirect ('main')
 
 def login(request):
     username = request.POST['username']
@@ -52,6 +52,8 @@ def register (request):
                
         user = User.objects.create_user(username=username, password=password)
         user.save()
+ return render(request, 'main.html')
+
 
 def mkevento(request):
     if request.method == 'POST':

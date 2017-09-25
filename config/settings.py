@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.60.192','127.0.0.1']
 
+SECRET_KEY = '0ych68w_j7)yl(((_*)y+sjmf=bnj=o1zu7)k1^2t7uu&b0+$-'
+LOGIN_REDIRECT_URL = 'cambio'
+
+
 
 # Application definition
 
