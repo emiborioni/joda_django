@@ -74,11 +74,11 @@
                         width="90" height="62.7"></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="#modal2">
+                        <a href="#load-login">
                             <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
                     </li>
                     <li>
-                        <a href="#modal1"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
+                        <a href="#load-event"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
                                 width="90" height="62.7"></a>
                     </li>
                     <li>
@@ -157,7 +157,7 @@
             {% endfor %}
 
 
-            <div id="modal1" class="modal blue-grey darken-1">
+            <div id='load-event' class="modal load-eventblue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'mkevento' %}" method="POST">
                     {% csrf_token %}
@@ -194,30 +194,30 @@
                     </div>
                 </form>
             </div>
-          <div id="modal2" class="modal blue-grey darken-1">
+          <div id='load-login' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
-                <form action="{% url 'login' %}" method="POST">
+                <form action="{% url 'iniciador' %}">
                     {% csrf_token %}
                     <div class="modal-content">
                         <h4 align="center">Login</h4>
-                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"></input>
+                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"/>
                     </div>
 
                     <div class="modal-content">
-                        <input name="password" type="password" placeholder="Write here your password"></<input>  
+                        <input name="password" type="password" placeholder="Write here your password"/>  
                     </div>
                     <center>
 					<br>
-					<a href="#modal3">Forgotten password?</a>
+					<a class="btn red" onclick="change_modal('load-login','load-register')">Forgotten password?
+                    </a>
 				    </center>
                     <div class="modal-footer blue-grey darken-2">
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit">
-                    <div>
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
+                    </div>
                     
                 </form>
-                
                 </div>
-                <div id="modal3" class="modal blue-grey darken-1">
+                <div id='load-register' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'registrar' %}" method="POST">
                     {% csrf_token %}
@@ -240,14 +240,21 @@
                     </div>
 
                     </form>
+                </div>
 </body>
 <script>
     $(document).ready(function () {
         $('.carousel').carousel();
     });
     $('.modal').modal();
-    $('.modal2').modal2();
-    $('.modal3').modal3();
+
+    function change_modal(closed,opened){
+        $('#' + closed).modal('close');
+        $('#' + opened).modal('open');
+    };
+
+    //$('.modal2').modal2();
+    //$('.modal3').modal3();
 </script>
 
 

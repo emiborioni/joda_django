@@ -21,6 +21,7 @@ urlpatterns = [
     
     url(r'^iniciador', iniciador,name="iniciador"),
     url(r'^ register/', register,name="registrar"),
+    url(r'^ mostrar/', mostrar,name="mostrar"),
     url(r'^ login/', login,name="login"),
     url(r'^ logout/', logout,name="logout"),
     url(r'^$', main,name="main"),

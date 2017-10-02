@@ -21,21 +21,20 @@ from .models import *
 def iniciador (request):
     return render(request,'iniciador.html')
 
+def mostrar (request):
+    return render(request,'register.html')
 
 def my_logout(request):
     logout(request)
     return redirect ('main')
 
 def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-    return redirect('main') 
+    print "estoyyyy"
+    return redirect ('main') 
 
 
 def main(request):
+    print "asda"
     joda = Evento.objects.all()
     usuario = Userprofile.objects.all()
     return render(request,'main.html', {'todos_los_eventos':joda})
@@ -52,7 +51,7 @@ def register (request):
                
         user = User.objects.create_user(username=username, password=password)
         user.save()
- return render(request, 'main.html')
+        return render(request, 'main')
 
 
 def mkevento(request):
