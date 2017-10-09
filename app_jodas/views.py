@@ -29,9 +29,12 @@ def my_logout(request):
     return redirect ('main')
 
 def login(request):
-    print "estoyyyy"
-    return redirect ('main') 
-
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+    return redirect('main') 
 
 def main(request):
     print "asda"

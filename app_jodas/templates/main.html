@@ -69,7 +69,7 @@
     <!--Nav Bar-->
     <div class="navbar-fixed">
         <nav>
-            <div class="nav-wrapper orange lighten-1">
+            <div class="nav-wrapper blue lighten-1">
                 <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png"
                         width="90" height="62.7"></a>
                 <ul class="right hide-on-med-and-down">
@@ -200,7 +200,7 @@
                     {% csrf_token %}
                     <div class="modal-content">
                         <h4 align="center">Login</h4>
-                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"/>
+                        <input name="username" class="materialize-textarea" type="text" placeholder="Write here your username"/>
                     </div>
 
                     <div class="modal-content">
@@ -208,7 +208,7 @@
                     </div>
                     <center>
 					<br>
-					<a class="btn red" onclick="change_modal('load-login','load-register')">Forgotten password?
+					<a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER
                     </a>
 				    </center>
                     <div class="modal-footer blue-grey darken-2">
@@ -223,13 +223,10 @@
                     {% csrf_token %}
                     <div class="modal-content">
                         <h4 align="center">Register</h4>
-                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your email"></input>
+                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your username"></input>
                     </div>
                     <div class="modal-content">
                         <input name="password" type="password" placeholder="Write here your password"></<input>
-                    </div>
-                    <div class="modal-content">
-                        <input name="password" type="password" placeholder="Repite your password"></<input>
                     </div>
                     <div class="modal-content">
                         <input name="celular" type="text" placeholder="Write here your mobilephone"></<input>
@@ -237,6 +234,7 @@
                     <div class="modal-content">
                         <input name="direccion" type="text" placeholder="Write here your address"></<input>
                     </div>
+                    <center><a class="btn red" onclick="register()">REGISTER</a></center>
                     </div>
 
                     </form>
