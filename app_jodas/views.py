@@ -44,7 +44,7 @@ def main(request):
     
 def register (request):
     if request.method == 'POST':
-        username = request.POST['nombre_user']
+        username = request.POST['username']
         password = request.POST['password']
         celular = request.POST['celular']
         direccion = request.POST['direccion']
