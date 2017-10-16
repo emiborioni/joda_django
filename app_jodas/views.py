@@ -56,6 +56,13 @@ def register (request):
         user.save()
         return render(request, 'main')
 
+def buscador(request):
+    if request.method == 'POST':
+        edad_min = request.POST['edad_min']
+        precio = request.POST['precio']
+        tipo_fiesta = request.POST['tipo_fiesta']
+        fecha = request.POST['fecha']
+        return redirect('main')
 
 def mkevento(request):
     if request.method == 'POST':
@@ -68,20 +75,30 @@ def mkevento(request):
         comentario = request.POST['comentario']
         foto = request.POST['foto']
         fecha = request.POST['fecha']
-        new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto )
+        tipo_fiesta = request.POST['tipo_fiesta']
+        new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto, tipo_fiesta=tipo_fiesta )
         new_evento.save()
         return redirect('main')
     return HttpResponse('HOLA <b style="color: red">no no no</b>')
 
 def mkasist(request, evento_id):
+    total = Evento.objects.get(id=evento_id)
+    asistencia = total.count_asist()
+    print asistencia
     ev = Evento.objects.get(id=evento_id)
     new_asist, new = Asist.objects.get_or_create(asist=ev, user=request.user)
     if new:
-        new_asist.save()
+        if asistencia >= total.capacidad:
+            return HttpResponse("El evento esta lleno")
+        else:
+            new_asist.save()
+            print "Estas en la joda"
     else:
         new_asist.delete()
+        print "Chau"
+    
+    
     return redirect('main')
-
 
 def delete_evento(request, evento_id):
     tw = Evento.objects.get(id=evento_id)

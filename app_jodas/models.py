@@ -44,3 +44,9 @@ class Asist(models.Model):
     asist = models.ForeignKey(Evento)
     def __unicode__(self):
        return 'Asiste: ' + self.user.username + ' al evento ' + self.asist.nombre 
+
+class Choice(models.Model):
+    evento = models.ForeignKey(Evento)
+
+    def __str__(self):
+        return self.choice_text

@@ -88,6 +88,7 @@
                 </ul>
             </div>
         </nav>
+        
     </div>
     <!--Nav Bar-->
 
@@ -98,7 +99,7 @@
         </a>{% endfor %}
     </div>
 
-    <center><a class="waves-effect yellow btn">BUSCAR</a></center>
+    <center><a class="waves-effect yellow btn" href="#finder">BUSCAR</a></center>
 
     <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
     <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
@@ -237,6 +238,35 @@
 
                     </form>
                 </div>
+                 <div id='finder' class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'buscador' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="modal-content">
+                        <h4 align="center">Buscador</h4>
+                        
+                        Nombre de la fiesta: {% for joda in todos_los_eventos %}<select><option>"{{ joda.nombre }}" </option></select>
+                    {% endfor %}
+                    </div>
+                    <div class="modal-content">
+                       Tipo de fiesta: {% for joda in todos_los_eventos %}<select><option>"{{ joda.tipo_fiesta }}" </option></select>
+                    {% endfor %}
+                    </div> 
+                    <div class="modal-content">
+                        Edad minima: {% for joda in todos_los_eventos %}<select><option>"{{ joda.edad_min}}" </option></select>
+                    {% endfor %}
+                    </div>
+                    <div class="modal-content">
+                        Precio: {% for joda in todos_los_eventos %}<select><option>"{{ joda.precio }}" </option></select>
+                    {% endfor %}
+                    </div>
+                    <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit"/>
+                    </div>
+
+                    </form>
+                </div>
+                
 </body>
 <script>
     $(document).ready(function () {
