@@ -157,44 +157,65 @@
             
             {% endfor %}
 
-
+        <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
             <div id='load-event' class="modal load-eventblue-grey darken-1">
+                <div class= "modal-content">
+                    <h4 align="center">New Event</h4>
                 <!-- este es el form que enseño javi-->
-                <form action="{% url 'mkevento' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="modal-content">
-                        <h4 align="center">New Event</h4>
-                        <input name="Ttext" class="materialize-textarea" type="text" placeholder="Write here your event name"></input>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            {{ form.nombre }}
+                            <label for="{{ form.nombre.id_for_label }}" class="black-text">Write here your event name</label>
+                        </div>
+                    <div class="input-field col s6">                
+                            <input type="text" class="datepicker" name="{{ form.fecha.html_name }}"/>
+                            <label for="{{ form.fecha.id_for_label }}" class="black-text">Fecha del Evento</label>
+                        </div>
                     </div>
-                    <div class="modal-content">
-                        <input name="fecha" type="date" placeholder="Write here the date YYYY-MM-DD HH:MM"></input>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input type="text" name="{{ form.edad_min.html_name }}"/>
+                            <label for="{{ form.edad_min.id_for_label }}" class="black-text">Write here the minium age</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input name="{{ form.precio.html_name }}" type="text"/>
+                            <label for="{{ form.precio.id_for_label }}" class="black-text">Write here the price</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input name="{{form.capacidad.html_name}}" type="text" />
+                            <label for="{{form.capacidad.id_for_label}}" class="black-text">Write here the maxium capacity</label>
+                        </div>
                     </div>
-                    <div class="modal-content">
-                        <input name="edad_min" type="number" placeholder="Write here the minium age"></input>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input name="{{form.tipo_fiesta.html_name}}" type="text"/>
+                            <label for="{{form.tipo_fiesta.id_for_label}}" class="black-text">Write here the type of party</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input name="{{form.ubicacion.html_name}}" type="text"/>
+                            <label for="{{form.ubicacion.id_for_label}}" class="black-text">Write here the address</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input name="{{form.telefono.html_name}}" type="text"/>
+                            <label for="{{form.telefono.id_for_label}}" class="black-text">Write here the phone</label>
+                        </div>
                     </div>
-                    <div class="modal-content">
-                        <input name="tipo_fiesta" type="text" placeholder="Write here type of party"></input>
+                    <div class="row">
+                        <div class="input-field col s12">
+                         <input name="{{form.comentario.html_name}}" type="text"/>
+                            <label for="{{form.comentario.id_for_label}}" class="black-text">Write here the important information</label>   
+                        </div>
                     </div>
-                    <div class="modal-content">
-                        <input name="precio" type="number" placeholder="Write here the price"></input>
+                    <div class="input-field col s12">
+                        {{ form.foto }}
                     </div>
-                    <div class="modal-content">
-                        <input name="capacidad" type="number" placeholder="Write here the maxium capacity "></input>
-                    </div>
-                    <div class="modal-content">
-                        <input name="ubicacion" type="text" placeholder="Write here the location "></input>
-                    </div>
-                    <div class="modal-content">
-                        <textarea name="comentario" class="materialize-textarea" type="text" placeholder="Write here important informacion"></textarea>
-                    </div>
-                    <div class="modal-content">
-                        <input name="foto" type="file" placeholder="Write here the location "></input>
-                    </div>
-                    <div class="modal-footer blue-grey darken-2">
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit">
-                    </div>
-                </form>
             </div>
+            <div class="modal-footer blue-grey darken-2">
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
+                    </div>
+            </div>
+        </form>
           <div id='load-login' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'iniciador' %}">
@@ -262,8 +283,6 @@
                     {% endfor %}
                     </div>
                     <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit"/>
-                    </div>
-
                     </form>
                 </div>
                 
@@ -278,9 +297,14 @@
         $('#' + closed).modal('close');
         $('#' + opened).modal('open');
     };
-
-    //$('.modal2').modal2();
-    //$('.modal3').modal3();
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+    });
 </script>
 
 

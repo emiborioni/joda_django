@@ -16,6 +16,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
+from .forms import *
 # Create your views here.
 
 def iniciador (request):
@@ -37,10 +38,19 @@ def login(request):
     return redirect('main') 
 
 def main(request):
-    print "asda"
-    joda = Evento.objects.all()
-    usuario = Userprofile.objects.all()
-    return render(request,'main.html', {'todos_los_eventos':joda})
+    if request.method == "POST":
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            post = form.instance
+            post.user = request.user
+            post.save() 
+            print "evento guardado"
+        return redirect('main')
+    else:
+         form = EventoForm()
+         joda = Evento.objects.all()
+         print "evento no guarda"
+    return render(request,'main.html', {'todos_los_eventos':joda, 'form':form})
     
 def register (request):
     if request.method == 'POST':
@@ -64,22 +74,6 @@ def buscador(request):
         fecha = request.POST['fecha']
         return redirect('main')
 
-def mkevento(request):
-    if request.method == 'POST':
-        user = request.user
-        text = request.POST['Ttext']
-        edad_min = request.POST['edad_min']
-        precio = request.POST['precio']
-        capacidad = request.POST['capacidad']
-        ubicacion = request.POST['ubicacion']
-        comentario = request.POST['comentario']
-        foto = request.POST['foto']
-        fecha = request.POST['fecha']
-        tipo_fiesta = request.POST['tipo_fiesta']
-        new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario, foto=foto, tipo_fiesta=tipo_fiesta )
-        new_evento.save()
-        return redirect('main')
-    return HttpResponse('HOLA <b style="color: red">no no no</b>')
 
 def mkasist(request, evento_id):
     total = Evento.objects.get(id=evento_id)

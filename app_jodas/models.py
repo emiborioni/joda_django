@@ -15,7 +15,7 @@ class Userprofile(models.Model):
     user=models.OneToOneField(User)
     celular = models.CharField(max_length= 10)
     direccion = models.CharField(max_length= 60)
-    telefono = models.CharField(max_length= 9)
+    telefono = models.CharField(max_length= 10)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __unicode__(self):
@@ -31,8 +31,8 @@ class Evento(models.Model):
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
     foto = models.ImageField(upload_to='fotos')  
-    fecha = models.DateTimeField(default = timezone.now)  
-    #Fecha de cuando va ser el evento
+    fecha = models.DateTimeField()  
+    telefono = models.CharField(max_length= 10)
     def count_asist(self):
         return Asist.objects.filter(asist=self).count()
 
