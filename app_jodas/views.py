@@ -29,13 +29,15 @@ def my_logout(request):
     logout(request)
     return redirect ('main')
 
-def login(request):
+def my_login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-    return redirect('main') 
+        return redirect('main') 
+    else:
+        print redirect('main')
 
 def main(request):
     if request.method == "POST":
@@ -90,7 +92,6 @@ def mkasist(request, evento_id):
     else:
         new_asist.delete()
         print "Chau"
-    
     
     return redirect('main')
 

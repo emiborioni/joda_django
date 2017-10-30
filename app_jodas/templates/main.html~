@@ -67,45 +67,30 @@
 
 <body class="view" background="{% static 'main.jpg' %}">
     <!--Nav Bar-->
-<div class="navbar-fixed">
-        
-
+    <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper blue lighten-1">
                 <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png"
-                    width="90" height="62.7"></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li>
-                            <a href="#load-login">
-                                {% if user.is_authenticated %}
-                                <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
-                               <li>
-                                <a href="#load-event"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
-                                    width="90" height="62.7"></a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'logout' %}"><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png"
-                                        width="90" height="62.7"></a>
-                                    </li>
-                                {% else %}
-                                 <li>
-                            <a href="#load-login">
-                                <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
-                               <div class="alert alert-warning">
-                                 <strong>Warning!</strong> Indicates a warning that might need attention.
-                                </div>
-                               <li>
-                                {% endif %}
-                                
-                            </li>
-                            
-                                
-                                </ul>
-                            </div>
-                        </nav>
-
-                    </div>
-                    <!--Nav Bar-->
+                        width="90" height="62.7"></a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="#load-login">
+                            <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
+                    </li>
+                    <li>
+                        <a href="#load-event"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
+                                width="90" height="62.7"></a>
+                    </li>
+                    <li>
+                        <a href=""><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png"
+                                width="90" height="62.7"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+    </div>
+    <!--Nav Bar-->
 
 
     <div class="carousel">
@@ -113,9 +98,8 @@
         <a class="carousel-item" href="#one!"><img src="{{ joda.foto.url }}" " /fotos" width="800" height="300"></img>
         </a>{% endfor %}
     </div>
-     {% if user.is_authenticated %}
+
     <center><a class="waves-effect yellow btn" href="#finder">BUSCAR</a></center>
-    {% endif %}
 
     <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
     <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
@@ -232,35 +216,49 @@
                     </div>
             </div>
         </form>
- <div id="load-login" class="modal blue-grey darken-1">
-                                <form action="{% url 'login' %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="modal-content">
-                                        <h4>LogIn</h4>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="username" id="username" type="text" class="validate">
-                                                <label for="username">Username</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="password" id="password" type="password" class="validate">
-                                                <label for="password">Password</label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <center>
-                                    <br>
-                                    <input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
-                                    </center>
-                                    <div class="modal-footer blue-grey darken-2">
-                                    <a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
-                                    </div>                                    </div>
+          <div id='load-login' class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'iniciador' %}">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <h4 align="center">Login</h4>
+                        <input name="username" class="materialize-textarea" type="text" placeholder="Write here your username"/>
+                    </div>
 
-                                </form>
+                    <div class="modal-content">
+                        <input name="password" type="password" placeholder="Write here your password"/>  
+                    </div>
+                    <center>
+					<br>
+					<input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
+				    </center>
+                    <div class="modal-footer blue-grey darken-2">
+                    	<a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
+                    </div>
+                </form>
+                </div>
+                <div id='load-register' class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'registrar' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <h4 align="center">Register</h4>
+                        <input name="mail" class="materialize-textarea" type="text" placeholder="Write here your username"></input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="password" type="password" placeholder="Write here your password"></<input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="celular" type="text" placeholder="Write here your mobilephone"></<input>
+                    </div>
+                    <div class="modal-content">
+                        <input name="direccion" type="text" placeholder="Write here your address"></<input>
+                    </div>
+                    <input class="modal-action modal-close btn-flat" onclick="register()" value="Submit" type="submit"/>
+                    </div>
+
+                    </form>
+                </div>
                  <div id='finder' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'buscador' %}" method="POST">
