@@ -37,7 +37,7 @@ def my_login(request):
         login(request, user)
         return redirect('main') 
     else:
-        print redirect('main')
+        return redirect('main')
 
 def main(request):
     if request.method == "POST":
@@ -56,17 +56,25 @@ def main(request):
     
 def register (request):
     if request.method == 'POST':
+        print "no anda ni bosta"
+   
         username = request.POST['username']
         password = request.POST['password']
         celular = request.POST['celular']
         direccion = request.POST['direccion']
-
-        userprofile = Userprofile(celular=celular, direccion=direccion)
-        userprofile.save()
-               
-        user = User.objects.create_user(username=username, password=password)
+        telefono = request.POST['telefono']   
+        user = User.objects.create_user(username=username,password=password)
+        print "anda"
+        userprofile = Userprofile(celular=celular, direccion=direccion,telefono=telefono, user=user)
         user.save()
-        return render(request, 'main')
+        userprofile.save()
+        
+        print "anda 2"       
+        return render(request, 'main.html')
+    else:  
+            return render(request,'main.html')
+
+
 
 def buscador(request):
     if request.method == 'POST':

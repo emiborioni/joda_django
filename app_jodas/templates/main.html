@@ -50,62 +50,64 @@
             width: "90px";
             height: "62.7px";
         }
-    .view {
-    height: 100%;
-}
-
-.view {
-    background: url("{% static 'main.jpg' %}")no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
+        
+        .view {
+            height: 100%;
+        }
+        
+        .view {
+            background: url("{% static 'main.jpg' %}")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 
 </head>
 
 <body class="view" background="{% static 'main.jpg' %}">
     <!--Nav Bar-->
-<div class="navbar-fixed">
-        
+    <div class="navbar-fixed">
+
 
         <nav>
             <div class="nav-wrapper blue lighten-1">
                 <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png"
-                    width="90" height="62.7"></a>
-                    <ul class="right hide-on-med-and-down">
+                        width="90" height="62.7"></a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="#load-login">
+                                {% if user.is_authenticated %}
+                                <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i>
+                        </font>
+                        <li>
+                            <a href="#load-event"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
+                                    width="90" height="62.7"></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}"><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png"
+                                    width="90" height="62.7"></a>
+                        </li>
+                        {% else %}
                         <li>
                             <a href="#load-login">
-                                {% if user.is_authenticated %}
                                 <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
-                               <li>
-                                <a href="#load-event"><img src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/JAVA.png"
-                                    width="90" height="62.7"></a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'logout' %}"><img src="https://cdn1.iconfinder.com/data/icons/materia-arrows-symbols-vol-8/24/018_320_door_exit_logout-128.png"
-                                        width="90" height="62.7"></a>
-                                    </li>
-                                {% else %}
-                                 <li>
-                            <a href="#load-login">
-                                <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
-                               <div class="alert alert-warning">
-                                 <strong>Warning!</strong> Indicates a warning that might need attention.
+                                <div class="alert alert-warning">
+                                    <strong>Warning!</strong> Indicates a warning that might need attention.
                                 </div>
-                               <li>
-                                {% endif %}
-                                
-                            </li>
-                            
-                                
-                                </ul>
-                            </div>
-                        </nav>
+                                <li>
+                                    {% endif %}
 
-                    </div>
-                    <!--Nav Bar-->
+                                </li>
+
+
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+    <!--Nav Bar-->
 
 
     <div class="carousel">
@@ -113,7 +115,7 @@
         <a class="carousel-item" href="#one!"><img src="{{ joda.foto.url }}" " /fotos" width="800" height="300"></img>
         </a>{% endfor %}
     </div>
-     {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <center><a class="waves-effect yellow btn" href="#finder">BUSCAR</a></center>
     {% endif %}
 
@@ -132,7 +134,7 @@
         <div class="w3-hide-large" style="margin-top:83px"></div>
 
         <!-- Photo grid -->
-        
+
         {% for joda in todos_los_eventos %}
         <div class="row">
             <div class="col s2">
@@ -149,10 +151,13 @@
                             {% if user == joda.creador %}
                             <a class="waves-effect deep-orange btn" href="{% url 'delete_evento' joda.id %}" <i class="small material-icons">delete</i></a>                            {% endif %}
                             <!--{% if new == new_rt.save()}-->
-                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>{{ joda.count_asist }}/{{joda.capacidad}}
+                            {% if user.is_authenticated %}
+                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>{{ joda.count_asist
+                            }}/{{joda.capacidad}}
                             <div class="right white-text">
                                 <p>{{ joda.count_asist }}</p>
                             </div>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -170,124 +175,161 @@
                     </div>
                 </div>
             </div>
-            
+
             {% endfor %}
 
-        <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div id='load-event' class="modal load-eventblue-grey darken-1">
-                <div class= "modal-content">
-                    <h4 align="center">New Event</h4>
-                <!-- este es el form que enseño javi-->
-                    <div class="row">
-                        <div class="input-field col s6">
-                            {{ form.nombre }}
-                            <label for="{{ form.nombre.id_for_label }}" class="black-text">Write here your event name</label>
-                        </div>
-                    <div class="input-field col s6">                
-                            <input type="text" class="datepicker" name="{{ form.fecha.html_name }}"/>
-                            <label for="{{ form.fecha.id_for_label }}" class="black-text">Fecha del Evento</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
-                            <input type="text" name="{{ form.edad_min.html_name }}"/>
-                            <label for="{{ form.edad_min.id_for_label }}" class="black-text">Write here the minium age</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input name="{{ form.precio.html_name }}" type="text"/>
-                            <label for="{{ form.precio.id_for_label }}" class="black-text">Write here the price</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input name="{{form.capacidad.html_name}}" type="text" />
-                            <label for="{{form.capacidad.id_for_label}}" class="black-text">Write here the maxium capacity</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
-                            <input name="{{form.tipo_fiesta.html_name}}" type="text"/>
-                            <label for="{{form.tipo_fiesta.id_for_label}}" class="black-text">Write here the type of party</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input name="{{form.ubicacion.html_name}}" type="text"/>
-                            <label for="{{form.ubicacion.id_for_label}}" class="black-text">Write here the address</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input name="{{form.telefono.html_name}}" type="text"/>
-                            <label for="{{form.telefono.id_for_label}}" class="black-text">Write here the phone</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                         <input name="{{form.comentario.html_name}}" type="text"/>
-                            <label for="{{form.comentario.id_for_label}}" class="black-text">Write here the important information</label>   
-                        </div>
-                    </div>
-                    <div class="input-field col s12">
-                        {{ form.foto }}
-                    </div>
-            </div>
-            <div class="modal-footer blue-grey darken-2">
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
-                    </div>
-            </div>
-        </form>
- <div id="load-login" class="modal blue-grey darken-1">
-                                <form action="{% url 'login' %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="modal-content">
-                                        <h4>LogIn</h4>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="username" id="username" type="text" class="validate">
-                                                <label for="username">Username</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="password" id="password" type="password" class="validate">
-                                                <label for="password">Password</label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <center>
-                                    <br>
-                                    <input class="modal-action modal-close btn-flat" value="Submit" type="submit"/>
-                                    </center>
-                                    <div class="modal-footer blue-grey darken-2">
-                                    <a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
-                                    </div>                                    </div>
 
-                                </form>
-                 <div id='finder' class="modal blue-grey darken-1">
-                <!-- este es el form que enseño javi-->
-                <form action="{% url 'buscador' %}" method="POST">
+            <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id='load-event' class="modal load-eventblue-grey darken-1">
+                    <div class="modal-content">
+                        <h4 align="center">New Event</h4>
+                        <!-- este es el form que enseño javi-->
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {{ form.nombre }}
+                                <label for="{{ form.nombre.id_for_label }}" class="black-text">Write here your event name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="text" class="datepicker" name="{{ form.fecha.html_name }}" />
+                                <label for="{{ form.fecha.id_for_label }}" class="black-text">Fecha del Evento</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <input type="text" name="{{ form.edad_min.html_name }}" />
+                                <label for="{{ form.edad_min.id_for_label }}" class="black-text">Write here the minium age</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input name="{{ form.precio.html_name }}" type="text" />
+                                <label for="{{ form.precio.id_for_label }}" class="black-text">Write here the price</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input name="{{form.capacidad.html_name}}" type="text" />
+                                <label for="{{form.capacidad.id_for_label}}" class="black-text">Write here the maxium capacity</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <input name="{{form.tipo_fiesta.html_name}}" type="text" />
+                                <label for="{{form.tipo_fiesta.id_for_label}}" class="black-text">Write here the type of party</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input name="{{form.ubicacion.html_name}}" type="text" />
+                                <label for="{{form.ubicacion.id_for_label}}" class="black-text">Write here the address</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input name="{{form.telefono.html_name}}" type="text" />
+                                <label for="{{form.telefono.id_for_label}}" class="black-text">Write here the phone</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="{{form.comentario.html_name}}" type="text" />
+                                <label for="{{form.comentario.id_for_label}}" class="black-text">Write here the important information</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s12">
+                            {{ form.foto }}
+                        </div>
+                    </div>
+                    <div class="modal-footer blue-grey darken-2">
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                    </div>
+                </div>
+            </form>
+            <div id="load-login" class="modal blue-grey darken-1">
+                <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
-                    
                     <div class="modal-content">
-                        <h4 align="center">Buscador</h4>
-                        
-                        Nombre de la fiesta: {% for joda in todos_los_eventos %}<select><option>"{{ joda.nombre }}" </option></select>
-                    {% endfor %}
+                        <h4>LogIn</h4>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="username" id="username" type="text" class="validate">
+                                <label for="username">Username</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input name="password" id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-content">
-                       Tipo de fiesta: {% for joda in todos_los_eventos %}<select><option>"{{ joda.tipo_fiesta }}" </option></select>
-                    {% endfor %}
-                    </div> 
-                    <div class="modal-content">
-                        Edad minima: {% for joda in todos_los_eventos %}<select><option>"{{ joda.edad_min}}" </option></select>
-                    {% endfor %}
+                    <center>
+                        <br>
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                    </center>
+                    <div class="modal-footer blue-grey darken-2">
+                        <a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
                     </div>
-                    <div class="modal-content">
-                        Precio: {% for joda in todos_los_eventos %}<select><option>"{{ joda.precio }}" </option></select>
-                    {% endfor %}
-                    </div>
-                    <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit"/>
+            </div>
+            <div id='finder' class="modal blue-grey darken-1">
+                    <!-- este es el form que enseño javi-->
+                    <form action="{% url 'buscador' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="modal-content">
+                            <h4 align="center">Buscador</h4>
+                            <div class="modal-content">
+                                Tipo de fiesta: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.tipo_fiesta }}" </option>{% endfor %}</select>
+                            </div>
+                            <div class="modal-content">
+                                Edad minima: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.edad_min}}" </option>{% endfor %}</select>
+                            </div>
+                            <div class="modal-content">
+                                Precio: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
+                            </div>
+                            <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit" />
                     </form>
+                    </div>
+
+            </form>
+            <div id='load-register' class="modal blue-grey darken-1">
+                <!-- este es el form que enseño javi-->
+                <form action="{% url 'registrar' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <h4>Register</h4>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="username" class="active white-text">username</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="password" name="password" type="password" class="validate">
+                                <label for="password" class="active white-text">Contraseña</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="telefono" name="telefono" type="text" class="validate">
+                                <label for="telefono" class="active white-text">telefono</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="celular" name="celular" type="text" class="validate">
+                                <label for="celular" class="active white-text">celular</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="input-field col s6">
+                            <input id="direccion" name="direccion" type="text" class="validate">
+                            <label for="direccion" class="active white-text">direccion</label>
+                            </div>
+                        </div>
+                    </div>
+                    <center>
+                        <br>
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                    </center>
+                    <div class="modal-footer blue-grey darken-2">
+                </form>
                 </div>
                 
+
+
 </body>
 <script>
     $(document).ready(function () {
@@ -295,18 +337,28 @@
     });
     $('.modal').modal();
 
-    function change_modal(closed,opened){
+    function change_modal(closed, opened) {
         $('#' + closed).modal('close');
         $('#' + opened).modal('open');
     };
+    function change_modal2(closed,closed,opened){
+        $('#' + closed).modal('close');
+        $('#' + opened).modal('close');
+        $('#' + opened).modal('open');
+    }
     $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: false // Close upon selecting a date,
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
     });
+
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+
 </script>
 
 
