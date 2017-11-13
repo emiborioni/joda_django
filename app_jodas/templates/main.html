@@ -266,25 +266,27 @@
                         <a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
                     </div>
             </div>
-        </form>
             <div id='finder' class="modal blue-grey darken-1">
                     <!-- este es el form que enseño javi-->
-                    <form action="/buscador" method="GET">
+                    <form action="{% url 'buscador' %}" method="POST">
+                        {% csrf_token %}
 
                         <div class="modal-content">
                             <h4 align="center">Buscador</h4>
                             <div class="modal-content">
-                                Tipo de fiesta: <select name="tipo_fiesta">{% for joda in todos_los_eventos %}<option>"{{ joda.tipo_fiesta }}" </option>{% endfor %}</select>
+                                Tipo de fiesta: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.tipo_fiesta }}" </option>{% endfor %}</select>
                             </div>
                             <div class="modal-content">
-                                Edad minima: <select name="edad_min">{% for joda in todos_los_eventos %}<option>"{{ joda.edad_min}}" </option>{% endfor %}</select>
+                                Edad minima: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.edad_min}}" </option>{% endfor %}</select>
                             </div>
                             <div class="modal-content">
-                                Precio: <select name="precio">{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
+                                Precio: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
                             </div>
-                            <input class="modal-action modal-close btn-flat" value="buscar" type="submit" />
+                            <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit" />
                     </form>
                     </div>
+
+            </form>
             <div id='load-register' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'registrar' %}" method="POST">

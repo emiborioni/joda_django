@@ -77,14 +77,13 @@ def register (request):
 
 
 def buscador(request):
-    edad_min = request.GET['edad_min']
-    precio = request.GET['precio']
-    tipo_fiesta = request.GET['tipo_fiesta']
+    if request.method == 'POST':
+        edad_min = request.POST['edad_min']
+        precio = request.POST['precio']
+        tipo_fiesta = request.POST['tipo_fiesta']
+        fecha = request.POST['fecha']
+        return redirect('main')
 
-    jodas = Evento.objects.filter(edad_min=edad_min.split("\"")[1], precio=precio.split("\"")[1], tipo_fiesta=tipo_fiesta.split("\"")[1])
-    form = EventoForm()
-
-    return render(request, "main.html", {'todos_los_eventos':jodas, 'form':form})
 
 def mkasist(request, evento_id):
     total = Evento.objects.get(id=evento_id)
