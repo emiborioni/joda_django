@@ -42,11 +42,10 @@ def my_login(request):
 def main(request):
     if request.method == "POST":
         form = EventoForm(request.POST)
-        if form.is_valid():
-            post = form.instance
-            post.user = request.user
-            post.save() 
-            print "evento guardado"
+        post = form.instance
+        post.user = request.user
+        post.save() 
+        print "evento guardado"
         return redirect('main')
     else:
          form = EventoForm()

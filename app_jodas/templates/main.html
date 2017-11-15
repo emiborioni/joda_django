@@ -116,7 +116,7 @@
         </a>{% endfor %}
     </div>
     {% if user.is_authenticated %}
-    <center><a class="waves-effect yellow btn" href="#finder">BUSCAR</a></center>
+    <center><a class="waves-effect yellow btn" href="#finder" onclick="change_modal2('load_register','finder')">BUSCAR</a></center>
     {% endif %}
 
     <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
@@ -149,15 +149,15 @@
                         <span class="card-title activator grey-text text-darken-4">{{joda.nombre}}<i class="material-icons right">more_vert</i></span>
                         <div class="card-action">
                             {% if user == joda.creador %}
-                            <a class="waves-effect deep-orange btn" href="{% url 'delete_evento' joda.id %}" <i class="small material-icons">delete</i></a>                            {% endif %}
+                            <a class="waves-effect deep-orange btn" href="{% url 'delete_evento' joda.id %}" <i class="small material-icons">delete</i></a>{% endif %}
                             <!--{% if new == new_rt.save()}-->
                             {% if user.is_authenticated %}
-                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>{{ joda.count_asist
-                            }}/{{joda.capacidad}}
+                            <a class="waves-effect blue darken-4 btn" href="{% url 'mkasist' joda.id %}">Asist</a>{{ joda.count_asist}}/{{joda.capacidad}}
                             <div class="right white-text">
                                 <p>{{ joda.count_asist }}</p>
                             </div>
                             {% endif %}
+                            
                         </div>
 
                     </div>
@@ -263,7 +263,7 @@
                         <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
                     </center>
                     <div class="modal-footer blue-grey darken-2">
-                        <a class="btn red" onclick="change_modal('load-login','load-register')">REGISTER</a>
+                        <a class="btn red" onclick="change_modal('load-login','load-register'); change_modal2('finder','load_register')">REGISTER</a>
                     </div>
             </div>
             <div id='finder' class="modal blue-grey darken-1">
@@ -282,7 +282,7 @@
                             <div class="modal-content">
                                 Precio: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
                             </div>
-                            <input class="modal-action modal-close btn-flat" onclick="buscador()" value="buscar" type="submit" />
+                            <input class="modal-action modal-close btn-flat" onclick="buscador(); change_modal2('finder','load_register')" value="buscar" type="submit" />
                     </form>
                     </div>
 
@@ -337,14 +337,14 @@
     });
     $('.modal').modal();
 
+
     function change_modal(closed, opened) {
         $('#' + closed).modal('close');
         $('#' + opened).modal('open');
     };
-    function change_modal2(closed,closed,opened){
-        $('#' + closed).modal('close');
-        $('#' + opened).modal('close');
-        $('#' + opened).modal('open');
+    function change_modal2(closed,opened){
+        $('#finder' + closed).modal('close');
+        $('#load-register' + opened).modal('open');
     }
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
