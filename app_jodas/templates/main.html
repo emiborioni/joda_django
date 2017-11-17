@@ -170,7 +170,7 @@
                         <ul><b style="color:black">Ubicacion: </b>{{joda.ubicacion}} </ul>
                         <ul><b style="color:black">Datos de Interes </b>{{joda.comentario}} </ul>
                         <ul><b style="color:black">Organizador: </b>{{joda.creador}} </ul>
-                        <ul><b style="color:black">Telefono del Organizador: </b>{{usuario.telefono}} </ul>
+                        <ul><b style="color:black">Telefono del Organizador: </b>{{joda.telefono}} </ul>
 
                     </div>
                 </div>
@@ -263,31 +263,11 @@
                         <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
                     </center>
                     <div class="modal-footer blue-grey darken-2">
-                        <a class="btn red" onclick="change_modal('load-login','load-register'); change_modal2('finder','load_register')">REGISTER</a>
+                        <a class="btn red" onclick="change_modal('load-login','load-register'); change_modal('finder','load-register')">REGISTER</a>
                     </div>
             </div>
-            <div id='finder' class="modal blue-grey darken-1">
-                    <!-- este es el form que enseño javi-->
-                    <form action="{% url 'buscador' %}" method="POST">
-                        {% csrf_token %}
-
-                        <div class="modal-content">
-                            <h4 align="center">Buscador</h4>
-                            <div class="modal-content">
-                                Tipo de fiesta: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.tipo_fiesta }}" </option>{% endfor %}</select>
-                            </div>
-                            <div class="modal-content">
-                                Edad minima: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.edad_min}}" </option>{% endfor %}</select>
-                            </div>
-                            <div class="modal-content">
-                                Precio: <select>{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
-                            </div>
-                            <input class="modal-action modal-close btn-flat" onclick="buscador(); change_modal2('finder','load_register')" value="buscar" type="submit" />
-                    </form>
-                    </div>
-
-            </form>
-            <div id='load-register' class="modal blue-grey darken-1">
+        </form>
+        <div id='load-register' class="modal blue-grey darken-1">
                 <!-- este es el form que enseño javi-->
                 <form action="{% url 'registrar' %}" method="POST">
                     {% csrf_token %}
@@ -305,11 +285,11 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="telefono" name="telefono" type="text" class="validate">
+                                <input id="telefono" name="telefono" type="text" class="validate" data-length="10">
                                 <label for="telefono" class="active white-text">telefono</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="celular" name="celular" type="text" class="validate">
+                                <input id="celular" name="celular" type="text" class="validate" data-length="10">
                                 <label for="celular" class="active white-text">celular</label>
                             </div>
                         </div>
@@ -319,7 +299,29 @@
                             <label for="direccion" class="active white-text">direccion</label>
                             </div>
                         </div>
+                        <center>
+                        <br>
+                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                    </center>
                     </div>
+                </form>
+        </div>
+            <div id='finder' class="modal blue-grey darken-1">
+                    <!-- este es el form que enseño javi-->
+                    <form action="/buscador" method="GET">
+
+                        <div class="modal-content">
+                            <h4 align="center">Buscador</h4>
+                            <div class="modal-content">
+                                Tipo de fiesta: <select name="tipo_fiesta">{% for joda in todos_los_eventos %}<option>"{{ joda.tipo_fiesta }}" </option>{% endfor %}</select>
+                            </div>
+                            <div class="modal-content">
+                                Edad minima: <select name="edad_min">{% for joda in todos_los_eventos %}<option>"{{ joda.edad_min}}" </option>{% endfor %}</select>
+                            </div>
+                            <div class="modal-content">
+                                Precio: <select name="precio">{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
+                            </div>
+                            <input class="modal-action modal-close btn-flat" onclick="buscador(); change_modal2('finder','load_register')" value="buscar" type="submit" />
                     <center>
                         <br>
                         <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
@@ -342,10 +344,6 @@
         $('#' + closed).modal('close');
         $('#' + opened).modal('open');
     };
-    function change_modal2(closed,opened){
-        $('#finder' + closed).modal('close');
-        $('#load-register' + opened).modal('open');
-    }
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -353,11 +351,14 @@
         clear: 'Clear',
         close: 'Ok',
         closeOnSelect: false // Close upon selecting a date,
+        
     });
-
     $(document).ready(function () {
         $('select').material_select();
     });
+    $(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+  });
 
 </script>
 

@@ -40,17 +40,21 @@ def my_login(request):
         return redirect('main')
 
 def main(request):
-    if request.method == "POST":
-        form = EventoForm(request.POST)
-        post = form.instance
-        post.user = request.user
-        post.save() 
-        print "evento guardado"
-        return redirect('main')
-    else:
-         form = EventoForm()
-         joda = Evento.objects.all()
-         print "evento no guarda"
+    if request.method == 'POST':
+        user = request.user
+        text = request.POST['nombre']
+        edad_min = request.POST['edad_min']
+        precio = request.POST['precio']
+        capacidad = request.POST['capacidad']
+        ubicacion = request.POST['ubicacion']
+        comentario = request.POST['comentario']
+        tipo_fiesta = request.POST['tipo_fiesta']
+        foto = request.FILES ['foto']
+        telefono = request.POST['telefono']
+        new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario,foto=foto, tipo_fiesta=tipo_fiesta,telefono=telefono )
+        new_evento.save()
+    form = EventoForm()
+    joda = Evento.objects.all()
     return render(request,'main.html', {'todos_los_eventos':joda, 'form':form})
     
 def register (request):
@@ -76,13 +80,14 @@ def register (request):
 
 
 def buscador(request):
-    if request.method == 'POST':
-        edad_min = request.POST['edad_min']
-        precio = request.POST['precio']
-        tipo_fiesta = request.POST['tipo_fiesta']
-        fecha = request.POST['fecha']
-        return redirect('main')
+    edad_min = request.GET['edad_min']
+    precio = request.GET['precio']
+    tipo_fiesta = request.GET['tipo_fiesta']
 
+    jodas = Evento.objects.filter(edad_min=edad_min.split("\"")[1], precio=precio.split("\"")[1], tipo_fiesta=tipo_fiesta.split("\"")[1])
+    form = EventoForm()
+
+    return render(request, "main.html", {'todos_los_eventos':jodas, 'form':form})
 
 def mkasist(request, evento_id):
     total = Evento.objects.get(id=evento_id)

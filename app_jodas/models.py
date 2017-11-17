@@ -31,7 +31,7 @@ class Evento(models.Model):
     comentario = models.CharField(max_length= 250)
     creador = models.ForeignKey(User)
     foto = models.ImageField(upload_to='fotos')  
-    fecha = models.DateTimeField()  
+    fecha = models.DateField(null=True, blank=True)  
     telefono = models.CharField(max_length= 10)
     def count_asist(self):
         return Asist.objects.filter(asist=self).count()
