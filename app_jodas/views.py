@@ -13,6 +13,7 @@ from django.db.models import Q
 from datetime import datetime, timedelta 
 from django.utils import timezone
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
@@ -29,15 +30,17 @@ def my_logout(request):
     logout(request)
     return redirect ('main')
 
-def my_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return redirect('main') 
-    else:
-        return redirect('main')
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            login(request, user)
+            return HttpResponseRedirect("main.html")# Redirect to a success page.
+        return HttpResponseRedirect("main.html")
+    form=LoginForm()
+    return render(request, 'main.html', {'login_form': LoginForm})
 
 def main(request):
     from datetime import datetime

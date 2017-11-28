@@ -93,9 +93,6 @@
                         <li>
                             <a href="#load-login">
                                 <font color="black"><i class="medium material-icons">perm_identity: {{ user|upper }}</a></i></font>
-                                <div class="alert alert-warning">
-                                    <strong>Warning!</strong> Indicates a warning that might need attention.
-                                </div>
                                 <li>
                                     {% endif %}
 
@@ -118,10 +115,6 @@
     {% if user.is_authenticated %}
     <center><a class="waves-effect yellow btn" href="#finder" onclick="change_modal2('load_register','finder')">BUSCAR</a></center>
     {% endif %}
-
-    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-    <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
-
 
     <!-- Overlay effect when opening sidenav on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" mouseover="w3_close()" style="cursor:pointer" title="close side menu"
@@ -234,13 +227,13 @@
                         </div>
                     </div>
                     <div class="modal-footer blue-grey darken-2">
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                        <input class="modal-action modal-close btn-large" value="Submit" type="submit" />
                     </div>
                 </div>
             </form>
             
             <div id="load-login" class="modal blue-grey darken-1">
-                <form action="{% url 'login' %}" method="POST">
+                <form action="{% url 'login' %}" class="form-signin" method="POST">
                     {% csrf_token %}
                     <div class="modal-content">
                         <center><h3>LogIn</h3></center>
@@ -258,6 +251,13 @@
                                 </div>
                             </div>
                         </div>
+                        {% if form.non_field_errors %}
+                            <ul class='form-errors'>
+                                {% for error in form.non_field_errors %}
+                                 <li>{{ error }}</li>
+                                 {% endfor %}
+                             </ul>
+                        {% endif %}
                     </div>
                     <center>
                         <br>
