@@ -40,6 +40,7 @@ def my_login(request):
         return redirect('main')
 
 def main(request):
+    from datetime import datetime
     if request.method == 'POST':
         user = request.user
         text = request.POST['nombre']
@@ -51,7 +52,21 @@ def main(request):
         tipo_fiesta = request.POST['tipo_fiesta']
         foto = request.FILES ['foto']
         telefono = request.POST['telefono']
-        new_evento = Evento(nombre=text, creador=user, edad_min=edad_min,precio=precio, capacidad=capacidad,ubicacion=ubicacion,comentario=comentario,foto=foto, tipo_fiesta=tipo_fiesta,telefono=telefono )
+        fecha = request.POST['fecha']
+        
+        datetime_object = datetime.strptime(fecha, '%d %B, %Y')
+        print datetime_object   
+        new_evento = Evento(nombre=text,
+                            creador=user, 
+                            edad_min=edad_min,
+                            precio=precio,
+                            capacidad=capacidad,
+                            ubicacion=ubicacion,
+                            comentario=comentario,
+                            foto=foto,
+                            tipo_fiesta=tipo_fiesta,
+                            telefono=telefono, 
+                            fecha=datetime_object)
         new_evento.save()
     form = EventoForm()
     joda = Evento.objects.all()

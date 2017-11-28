@@ -73,7 +73,7 @@
 
         <nav>
             <div class="nav-wrapper blue lighten-1">
-                <a href="{% url 'main' %}" class="brand-logo"><img src="https://img.clipartfest.com/1da2ee5fa56ec8c9cd9fd88c4635566c_bird-logo-on-behance-clipart-bird-logo_600-418.png"
+                <a href="{% url 'main' %}" class="brand-logo"><img src="{% static '2_1.png' %}"
                         width="90" height="62.7"></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
@@ -179,10 +179,10 @@
             {% endfor %}
 
 
-            <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data" class= "blue-grey darken-1">
                 {% csrf_token %}
                 <div id='load-event' class="modal load-eventblue-grey darken-1">
-                    <div class="modal-content">
+                    <div class="modal-content blue-grey darken-1">
                         <h4 align="center">New Event</h4>
                         <!-- este es el form que enseño javi-->
                         <div class="row">
@@ -238,11 +238,12 @@
                     </div>
                 </div>
             </form>
+            
             <div id="load-login" class="modal blue-grey darken-1">
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="modal-content">
-                        <h4>LogIn</h4>
+                        <center><h3>LogIn</h3></center>
                         <div class="row">
                             <div class="input-field col s12">
                                 <input name="username" id="username" type="text" class="validate">
@@ -260,11 +261,10 @@
                     </div>
                     <center>
                         <br>
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
-                    </center>
-                    <div class="modal-footer blue-grey darken-2">
-                        <a class="btn red" onclick="change_modal('load-login','load-register'); change_modal('finder','load-register')">REGISTER</a>
-                    </div>
+                        <input class="modal-action modal-close btn-large" value="Submit" type="submit" />
+                   
+                    <a class="modal-action modal-close btn-large"  onclick="change_modal('load-login','load-register'); change_modal('finder','load-register')">REGISTER</a>
+                     </center>
             </div>
         </form>
         <div id='load-register' class="modal blue-grey darken-1">
@@ -272,11 +272,11 @@
                 <form action="{% url 'registrar' %}" method="POST">
                     {% csrf_token %}
                     <div class="modal-content">
-                        <h4>Register</h4>
+                        <center><h4>Register</h4></center>
                         <div class="row">
                             <div class="input-field col s6">
                                 <input id="username" name="username" type="text" class="validate">
-                                <label for="username" class="active white-text">username</label>
+                                <label for="username" class="active white-text">Username</label>
                             </div>
                             <div class="input-field col s6">
                                 <input id="password" name="password" type="password" class="validate">
@@ -286,22 +286,22 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <input id="telefono" name="telefono" type="text" class="validate" data-length="10">
-                                <label for="telefono" class="active white-text">telefono</label>
+                                <label for="telefono" class="active white-text">Telefono</label>
                             </div>
                             <div class="input-field col s6">
                                 <input id="celular" name="celular" type="text" class="validate" data-length="10">
-                                <label for="celular" class="active white-text">celular</label>
+                                <label for="celular" class="active white-text">Celular</label>
                             </div>
                         </div>
                         <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <input id="direccion" name="direccion" type="text" class="validate">
-                            <label for="direccion" class="active white-text">direccion</label>
+                            <label for="direccion" class="active white-text">Direccion</label>
                             </div>
                         </div>
                         <center>
                         <br>
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                        <input class="modal-action modal-close btn-large " value="Submit" type="submit" />
                     </center>
                     </div>
                 </form>
@@ -321,12 +321,10 @@
                             <div class="modal-content">
                                 Precio: <select name="precio">{% for joda in todos_los_eventos %}<option>"{{ joda.precio }}" </option>{% endfor %}</select>
                             </div>
-                            <input class="modal-action modal-close btn-flat" onclick="buscador(); change_modal2('finder','load_register')" value="buscar" type="submit" />
                     <center>
                         <br>
-                        <input class="modal-action modal-close btn-flat" value="Submit" type="submit" />
+                        <input class="modal-action modal-close btn-large" onclick="buscador(); change_modal2('finder','load_register')" value="buscar" type="submit" />
                     </center>
-                    <div class="modal-footer blue-grey darken-2">
                 </form>
                 </div>
                 
@@ -350,7 +348,8 @@
         today: 'Today',
         clear: 'Clear',
         close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
+        closeOnSelect: false, // Close upon selecting a date,
+        //format: "yyyy mm dd",
         
     });
     $(document).ready(function () {
